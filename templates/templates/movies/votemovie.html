@@ -1,0 +1,107 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+
+
+{% if movie %}
+<div class="container fluid">
+  <div class="alert alert-info">
+    <center>
+      <h3 style="color:black;">{{ movie.title }} ({{movie.year}})</h3>
+    </center>
+  </div>
+  <center>
+    <svg width="175" height="239">
+      <g>
+	<rect x="0" y="0" width="175" height="239" fill="dodgerblue" stroke="black" style="stroke-width:3;"></rect>
+	<text x="35" y="120" font-family="Verdana" font-size="15" fill="text" >(Movie Poster)</text>
+      </g>
+      Sorry, your browser does not support SVG images.
+    </svg>
+  </center>
+  <p>&nbsp;
+</div>
+
+{% else %}
+
+<div class="container fluid">
+  <div class="alert alert-danger">
+    <center>
+      <h3>Site maintenance: come back here soon!</h3>
+    </center>
+  </div>
+</div>
+{% endif %}
+
+
+<div class="container">
+<div class="row hidden-md hidden-sm hidden-lg">
+  <div class="col col-xs-2 col-xs-offset-1">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-2x fa-thumbs-o-up"></i></a>
+    </button>
+  </div>
+  <div class="col col-xs-2">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-2x fa-thumbs-o-down"></i></a>
+    </button>
+  </div>
+  <div class="col col-xs-2 col-xs-offset-1">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-2x fa-arrow-left"></i></a>
+    </button>
+  </div>
+  
+  <div class="col col-xs-2">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-2x fa-arrow-right"></i></a>
+    </button>
+  </div>
+</div>
+
+
+<div class="row hidden-xs">
+  <div class="col col-sm-1 col-sm-offset-2">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-4x fa-thumbs-o-up"></i></a>
+    </button>
+  </div>
+  <div class="col col-sm-1 col-sm-offset-1">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-4x fa-thumbs-o-down"></i></a>
+    </button>
+  </div>
+  <div class="col col-sm-1 col-sm-offset-1">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-4x fa-arrow-left"></i></a>
+    </button>
+  </div>
+  <div class="col col-sm-1 col-sm-offset-1">
+    <button class="btn btn-default">
+      <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-4x fa-arrow-right"></i></a>
+    </button>
+  </div>
+</div>
+
+</div>
+
+<div class="container">
+  <p>&nbsp;
+  <p>More about this movie:
+    {% if movie %}
+  <p><em><b>Synopsis -</b></em> {{ movie.synopsis }}
+    {% endif %}
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+
+
+{% endblock %}
+
+
+
+

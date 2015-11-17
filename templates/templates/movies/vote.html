@@ -1,0 +1,54 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+
+
+<div class="container">
+  <h3>Select a category to vote on or return home <a href="{% url 'movies:home' %}"><i class="fa fa-home"></i></a></h3>
+  <p>&nbsp;
+</div>
+
+
+<div class="container fluid">
+  
+  <div class="well col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:votemovie' %}"><font  size=+3 >Movies</font></a>
+  </div>
+
+
+ <div class="well col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:vote' %}"><font  size=+3>Actors</font></a>
+  </div>
+
+ <div class="well col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:vote' %}"><font  size=+3>Directors</font></a>
+  </div>
+
+ <div class="well col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:vote' %}"><font  size=+3>Writers</font></a>
+  </div>
+
+
+ <div class="well col-sm-4 col-sm-offset-1">
+   <a href="{% url 'movies:vote' %}"><font  size=+3>Critics</font></a>
+ </div>
+ 
+ 
+ <div class="well col-sm-4 col-sm-offset-1">
+   <a href="{% url 'movies:vote' %}"><font  size=+3>Random</font></a>
+ </div>
+ 
+
+
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+{% endblock %}
+
+
+
+
