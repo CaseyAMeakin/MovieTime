@@ -35,24 +35,64 @@
       </button>
       
       <a href="{% url 'movies:index' %}" class="navbar-brand">
-	  <font color="dodgerblue">M</font>ovie<font color="white">T</font>ime!
+	  <font color="dodgerblue">M</font>ovie<font color="white">T</font>ime!<sup><font color="orange">(beta)</font></sup>
       </a>
+      <!--
       <a href="{% url 'movies:index' %}" class="navbar-brand">
         <font size=-1>[ <font color="dodgerblue">{{ user.get_username }}</font> ]</font>
       </a>
+      -->
     </div>
 
     <!-- Menu Items -->
     <div class="collapse navbar-collapse" id="mainNavBar">
       <ul class="nav navbar-nav">
 	<!-- Dropdown menu -->
-	<li ><a href="{% url 'movies:home' %}">Home <i class="fa fa-home"></i></a></li>
+	<li ><a href="{% url 'movies:home' %}">Home</a></li>
+
+	<li class="dropdown">
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lists<span class="caret"></span></a>
+	  <ul class="dropdown-menu">
+	    <li><a href="#">Watch List</a></li>
+	    <li><a href="{% url 'movies:votelist' %}">My Votes</a></li>
+	  </ul>
+	</li>
+
+	<li class="dropdown">
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vote<span class="caret"></span></a>
+	  <ul class="dropdown-menu">
+	    <li><a href="{% url 'movies:votemovie' %}">Movies</a></li>
+	    <li><a href="#">Actors</a></li>
+            <li><a href="#">Directors</a></li>
+            <li><a href="#">Writers</a></li>
+	  </ul>
+	</li>
+
+	<li class="dropdown">
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+	    <li><a href="#">Movies</a><li>
+	    <li><a href="#">Actors</a></li>
+            <li><a href="#">Directors</a></li>
+            <li><a href="#">Writers</a></li>
+	  </ul>
+	</li>
+
+	
 	<li ><a href="{% url 'movies:about' %}">About</a></li>
+	
       </ul>
-      <!-- aligned Right -->
+
+
+      
+
+
+      <!-- align Right -->
       <ul class="nav navbar-nav navbar-right">
 	<li><a href="{% url 'movies:userlogout' %}">Logout</a></li>
       </ul>
+
+
     </div>
   </div>
 </nav>

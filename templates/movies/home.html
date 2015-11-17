@@ -7,20 +7,26 @@
 
 <div class="container fluid">
 
-  <div class="well col-sm-4 col-sm-offset-1">
-    <a href="{% url 'movies:vote' %}"><i class="fa fa-3x fa-check"></i>&nbsp;&nbsp; <font size=+3>Vote</font></a>
-  </div>
-
-  <div class="well col-sm-4 col-sm-offset-2">
-    <a href="#"><i class="fa fa-3x fa-video-camera"></i>&nbsp;&nbsp; <font size=+3>Watch</font></a>
+  <div class="row">
+    <div class="col col-sm-12">
+      <p>Welcome to MovieTime! </p>
+    </div>
   </div>
 
   <div class="well col-sm-4 col-sm-offset-1">
-    <a href="#"><i class="fa fa-3x fa-list"></i>&nbsp;&nbsp; <font size=+3>My List</font></a>
+    <a href="{% url 'movies:vote' %}"><i class="fa  fa-check"></i>&nbsp;&nbsp; <font size=+1>Vote</font></a>
   </div>
 
   <div class="well col-sm-4 col-sm-offset-2">
-    <a href="#"><i class="fa fa-3x fa-search"></i>&nbsp;&nbsp; <font size=+3>Explore</font></a>
+    <a href="#"><i class="fa  fa-video-camera"></i>&nbsp;&nbsp; <font size=+1>Watch</font></a>
+  </div>
+
+  <div class="well col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:lists' %}"><i class="fa  fa-list"></i>&nbsp;&nbsp; <font size=+1>My Lists</font></a>
+  </div>
+
+  <div class="well col-sm-4 col-sm-offset-2">
+    <a href="#"><i class="fa  fa-search"></i>&nbsp;&nbsp; <font size=+1>Explore</font></a>
   </div>  
 </div>
 

@@ -1,0 +1,28 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+
+<div class="container fluid">
+  
+  <div class="row">
+    <div class="col col-xs-12">
+      <h3>Movie Votes</h3>
+      <p>Positive votes: {{ num_pos_movies }} <i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;[<a href="{% url 'movies:mygoodmovies' %}">see all</a>]</p>
+      <p>Negative votes: {{ num_neg_movies }} <i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;[<a href="{% url 'movies:mybadmovies' %}">see all</a>]</p>
+      <p>Pass votes: {{ num_pass_movies}} <i class="fa fa-arrow-right"></i></p>
+      <p>Total considered: {{ num_tot_movies }}</p>
+    </div>
+  </div>
+  
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+{% endblock %}
+
+
+
+

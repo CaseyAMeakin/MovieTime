@@ -1,0 +1,64 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+<div class="container fluid">
+  Recorded a vote for this movie:
+</div>
+
+
+{% if movie %}
+<div class="container fluid">
+  <div class="alert alert-info">
+    <center>
+      <h3 style="color:black;">{{ movie.title }} ({{movie.year}})</h3>
+    </center>
+  </div>
+  <center>
+    <svg width="175" height="239">
+      <g>
+	<rect x="0" y="0" width="175" height="239" fill="dodgerblue" stroke="black" style="stroke-width:3;"></rect>
+	<text x="35" y="120" font-family="Verdana" font-size="15" fill="text" >(Movie Poster)</text>
+      </g>
+      Sorry, your browser does not support SVG images.
+    </svg>
+  </center>
+  <p>&nbsp;
+</div>
+
+{% else %}
+
+<div class="container fluid">
+  <div class="alert alert-danger">
+    <center>
+      <h3>Site maintenance: come back here soon!</h3>
+    </center>
+  </div>
+</div>
+{% endif %}
+
+
+<div class="container">
+  <div class="row">
+    <a href="{% url 'movies:votemovie'%}"><i class="fa fa-arrow-right"></i></a>
+  </div>
+</div>
+
+
+<div class="container">
+  <p>&nbsp;
+  <p>More about this movie:
+    {% if movie %}
+  <p><em><b>Synopsis -</b></em> {{ movie.synopsis }}
+    {% endif %}
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+  
+
+{% endblock %}
+
+
+
+
