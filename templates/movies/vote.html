@@ -5,38 +5,43 @@
 
 
 <div class="container">
-  <h3>Select a category to vote on or return home <a href="{% url 'movies:home' %}"><i class="fa fa-home"></i></a></h3>
+  <h3>Vote on:</h3>
   <p>&nbsp;
 </div>
 
 
 <div class="container fluid">
   
-  <div class="well col-sm-4 col-sm-offset-1">
-    <a href="{% url 'movies:votemovie' %}"><font  size=+1 >Movies</font></a>
+  <div class=" col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:randommovie' %}"><font  size=+1 >Movies</font></a>
+    <p>&nbsp;</p>
   </div>
 
-
- <div class="well col-sm-4 col-sm-offset-1">
+ <div class=" col-sm-4 col-sm-offset-1">
     <a href="{% url 'movies:vote' %}"><font  size=+1>Actors</font></a>
+    <p>&nbsp;</p>
   </div>
 
- <div class="well col-sm-4 col-sm-offset-1">
+ <div class=" col-sm-4 col-sm-offset-1">
     <a href="{% url 'movies:vote' %}"><font  size=+1>Directors</font></a>
+    <p>&nbsp;</p>
   </div>
 
- <div class="well col-sm-4 col-sm-offset-1">
+ <div class=" col-sm-4 col-sm-offset-1">
     <a href="{% url 'movies:vote' %}"><font  size=+1>Writers</font></a>
+    <p>&nbsp;</p>
   </div>
 
 
- <div class="well col-sm-4 col-sm-offset-1">
+ <div class=" col-sm-4 col-sm-offset-1">
    <a href="{% url 'movies:vote' %}"><font  size=+1>Critics</font></a>
+   <p>&nbsp;</p>
  </div>
  
  
- <div class="well col-sm-4 col-sm-offset-1">
+ <div class=" col-sm-4 col-sm-offset-1">
    <a href="{% url 'movies:vote' %}"><font  size=+1>Random</font></a>
+   <p>&nbsp;</p>
  </div>
  
 

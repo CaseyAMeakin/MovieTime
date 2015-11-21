@@ -1,0 +1,37 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+<!-- Forms -->
+<form action="{% url 'movies:delfromwatchlist' %}" method="post" id="delete">
+  {% csrf_token %}
+</form>
+
+
+
+<div class="container-fluid">
+  
+  <div class="row">
+    <div class="col col-xs-12">
+      <h3>My Watch List</h3>
+    </div>
+  </div>
+
+  {% if movies %} 
+  {% for movie in movies %}
+  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}}, {{movie.year}}</a>
+    <button class="btn btn-xs" value="{{movie.id}}" name="movieid" form="delete"><i class="fa fa-trash-o"></i></button>
+  {% endfor %}
+  {% endif %}
+
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+{% endblock %}
+
+
+
+

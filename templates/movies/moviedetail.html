@@ -1,0 +1,128 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+<!-- FORMS -->
+
+<form action="{% url 'movies:addmovievote' %}" method="post" id="vote">
+  {% csrf_token %}
+</form>
+
+<form action="{% url 'movies:randommovie' %}" method="get" id="random">
+</form>
+
+<form action="{% url 'movies:addtowatchlist' %}" method="post" id="watchlist">
+  {% csrf_token %}
+</form>
+
+<!-- DEBUGGING -->
+
+{% if uservotes %}
+Uservotes: <br/>
+{% for vote in uservotes %}
+{{vote.user}} {{vote.itemType}} {{vote.itemId}} {{vote.like}}<br/>
+{% endfor %}
+{% endif %}
+
+
+<!-- MESSAGE -->
+
+{% if message %}
+{% endif %}
+
+
+<!--  Movie Title, Year -->
+
+{% if movie %}
+<div class="container fluid">
+  <div class="alert alert-info alert-sm">
+    <center>
+      <h3 style="color:black;">{{ movie.title }} ({{movie.year}})</h3>
+      <font style="color:black">Genres:</font> {{ movie.genres }}<br/>
+      <font style="color:black">Rating:</font> {{ movie.rating }}{% if voteicon %}<font style="color:black">, Current Vote:</font> <i class="fa {{ voteicon }}"></i>{% else %}<font style="color:black">, Current Vote: </font>None{% endif %}{% if watchlist %}<font style="color:black">, On Watchlist:</font> Yes{% endif %}
+    </center>
+    
+  </div>
+  <center>
+    {% if posterImgSrc %}
+    <img src="http://static.movietime.co/posters/{{posterImgSrc}}" style="width:175;height:239;" onerror="this.src='http://static.movietime.co/posters/missing.png'" >
+    {% else %}
+    <img src="http://static.movietime.co/posters/missing.png" style="width:175;height:239;">
+    {% endif %}
+    <p>&nbsp;
+  </center>
+</div>
+
+{% else %}
+
+<div class="container fluid">
+  <div class="alert alert-danger">
+    <center>
+      <h3>Site maintenance: check back here soon!</h3>
+    </center>
+  </div>
+</div>
+{% endif %}
+
+
+
+<div class="container">
+  
+  <!-- Vote Buttons  --->
+  
+  <div class="row"> 
+    <center>
+      <span title="I like this one!">
+	<button class="btn btn-default" type="submit" value="1 {{movie.id}} 1" form="vote" name="thevote">
+	  <i class="fa fa-3x fa-thumbs-o-up"></i>
+	</button>
+      </span>
+      &nbsp;&nbsp;
+      <span title="I don't like this one!">
+	<button class="btn btn-default" type="submit" value="1 {{movie.id}} -1" form="vote" name="thevote">
+	  <i class="fa fa-3x fa-thumbs-o-down"></i>
+	</button>
+      </span>
+      &nbsp;&nbsp;
+      <span title="I'm pretty neutral on this one">
+	<button class="btn btn-default" type="submit" value="1 {{movie.id}} 0" form="vote" name="thevote">
+	  <i class="fa fa-3x fa-meh-o"></i>
+	</button>
+      </span>
+      &nbsp;&nbsp;
+      <span title="Go to another random movie to vote">
+	<button class="btn btn-default" type="submit" form="random">
+          <i class="fa fa-3x fa-random"></i>
+      </span>
+      </button>
+
+
+    </center>
+  </div>
+  
+
+</form>
+
+<div class="container">
+  <p>&nbsp;</p>
+  <center>
+  <button class="btn btn-info" value="{{movie.id}}" name="movieid" form="watchlist" type="submit">
+    Add to Watch List
+  </button>
+  </center>
+  <p>&nbsp;</p>
+  <h4>More about this movie</h4>
+    {% if movie %}
+  <p><em><b>Synopsis -</b></em> {{ movie.synopsis }}
+    {% endif %}
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+  
+
+{% endblock %}
+
+
+
+

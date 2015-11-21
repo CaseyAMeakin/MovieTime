@@ -15,6 +15,7 @@
 
 
 <!-- DEBUGGING -->
+
 {% if uservotes %}
 Uservotes: <br/>
 {% for vote in uservotes %}
@@ -25,15 +26,15 @@ Uservotes: <br/>
 
 <!-- STATUS -->
 
-{% if votedmovie %}
+{% if priormovie %}
 {% if voteicon == "fa-arrow-right" %}
 <div class="container fluid">
- <font color="red">Last vote</font>: Pass on <em>{{ votedmovie.title }} ({{votedmovie.year}})</em> <button class="btn btn-xs btn-info" type="submit" form="revote" name="revote" value="{{votedmovie.id}} -1">change</button>
+ <font color="red">Last vote</font>: Pass on <em>{{ priormovie.title }} ({{priormovie.year}})</em> <button class="btn btn-xs btn-info" type="submit" form="revote" name="revote" value="{{priormovie.id}} -1">change</button>
   <br/>&nbsp;
 </div>
 {% else %}
 <div class="container fluid">  
-  <font color="red">Last vote</font>: <i class="fa {{voteicon}}"></i> for <em>{{ votedmovie.title }} ({{votedmovie.year}})</em> <button class="btn btn-xs btn-info" type="submit" form="revote" name="revote" value="{{votedmovie.id}} -1">change</button>
+  <font color="red">Last vote</font>: <i class="fa {{voteicon}}"></i> for <em>{{ priormovie.title }} ({{priormovie.year}})</em> <button class="btn btn-xs btn-info" type="submit" form="revote" name="revote" value="{{priormovie.id}} -1">change</button>
   <br/>&nbsp;
 </div>
 {% endif %}
@@ -52,22 +53,22 @@ Uservotes: <br/>
 
 {% if movie %}
 <div class="container fluid">
-  <div class="alert alert-info">
+  <div class="alert alert-info alert-sm">
     <center>
       <h3 style="color:black;">{{ movie.title }} ({{movie.year}})</h3>
+      <font style="color:black">Genres:</font> {{ movie.genres }}<br/>
+      <font style="color:black">Rating:</font> {{ movie.rating }}
     </center>
     
   </div>
   <center>
-    <svg width="175" height="239">
-      <g>
-	<rect x="0" y="0" width="175" height="239" fill="dodgerblue" stroke="black" style="stroke-width:3;"></rect>
-	<text x="35" y="120" font-family="Verdana" font-size="15" fill="text" >(Movie Poster)</text>
-      </g>
-      Sorry, your browser does not support SVG images.
-    </svg>
+    {% if posterImgSrc %}
+    <img src="http://static.movietime.co/posters/{{posterImgSrc}}" style="width:175;height:239;" onerror="this.src='http://static.movietime.co/posters/missing.png'" >
+    {% else %}
+    <img src="http://static.movietime.co/posters/missing.png">
+    {% endif %}
+    <p>&nbsp;
   </center>
-  <p>&nbsp;
 </div>
 
 {% else %}
@@ -128,9 +129,6 @@ Uservotes: <br/>
   </div>
 
 </form>
-
-
-
 
 <div class="container">
   <p>&nbsp;

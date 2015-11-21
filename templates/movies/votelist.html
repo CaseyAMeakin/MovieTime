@@ -3,18 +3,43 @@
 {% block content %}
 
 
-<div class="container fluid">
+<div class="container-fluid">
   
   <div class="row">
     <div class="col col-xs-12">
       <h3>Movie Votes</h3>
-      <p>Positive votes: {{ num_pos_movies }} <i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;[<a href="{% url 'movies:mygoodmovies' %}">see all</a>]</p>
-      <p>Negative votes: {{ num_neg_movies }} <i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;[<a href="{% url 'movies:mybadmovies' %}">see all</a>]</p>
-      <p>Pass votes: {{ num_pass_movies}} <i class="fa fa-arrow-right"></i></p>
-      <p>Total considered: {{ num_tot_movies }}</p>
+      <table class="table">
+	<tbody>
+	  <tr>
+	    <td>Positive votes &nbsp;<i class="fa fa-thumbs-o-up"></i></td>
+	    <td><a href="{% url 'movies:votelist' %}?type=pos&page=1">{{ num_pos_movies }}</a></td>
+	  </tr>
+	  <tr>
+	    <td>Negative votes &nbsp;<i class="fa fa-thumbs-o-down"></i></td>
+	    <td><a href="{% url 'movies:votelist' %}?type=neg&page=1">{{ num_neg_movies }}</a></td>
+	  </tr>
+	  <tr>
+	    <td>Neutral votes &nbsp;<i class="fa fa-meh-o"></i></td>
+	    <td><a href="{% url 'movies:votelist' %}?type=neu&page=1">{{ num_neu_movies}}</a></td>
+	  </tr>
+	  <tr>
+	    <td>Total considered</td>
+	    <td>{{ num_tot_movies }}</td>
+	  </tr>
+	</tbody>
+      </table>
     </div>
   </div>
+
+  {% if listHeader and movies %} 
+  <p>&nbsp;</p>
+  <h4>{{ listHeader }}</h4>
   
+  {% for movie in movies %}
+  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}}, {{movie.year}}</a></p>
+  {% endfor %}
+  {% endif %}
+    
 </div>
 
 <p>&nbsp;
