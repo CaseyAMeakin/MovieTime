@@ -1,0 +1,36 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+
+<div class="container">
+  <h3>Select a list:</h3>
+  <p>&nbsp;
+</div>
+
+<div class="container fluid">
+  
+ <div class="col-sm-4 col-sm-offset-1">
+   <a href="{% url 'movies:watchlist' %}"><font  size=+1>Watch List</font></a>
+   <p>&nbsp;</p>
+ </div>
+ 
+ 
+ <div class=" col-sm-4 col-sm-offset-1">
+   <a href="{% url 'movies:votelist' %}"><font  size=+1>My Votes</font></a>
+   <p>&nbsp;</p>
+ </div>
+ 
+
+
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+{% endblock %}
+
+
+
+

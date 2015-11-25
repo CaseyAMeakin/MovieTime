@@ -1,0 +1,149 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+<form action="{% url 'movies:votemovie' %}" method="post" id="vote">
+  {% csrf_token %}
+</form>
+
+<form action="{% url 'movies:votemovie' %}" method="post" id="revote">
+  {% csrf_token %}
+</form>
+
+<form action="{% url 'movies:votemovie' %}" id="pass">
+</form>
+
+
+<!-- DEBUGGING -->
+
+{% if uservotes %}
+Uservotes: <br/>
+{% for vote in uservotes %}
+{{vote.user}} {{vote.itemType}} {{vote.itemId}} {{vote.like}}<br/>
+{% endfor %}
+{% endif %}
+
+
+<!-- STATUS -->
+
+{% if priormovie %}
+{% if voteicon == "fa-arrow-right" %}
+<div class="container fluid">
+ <font color="red">Last vote</font>: Pass on <em>{{ priormovie.title }} ({{priormovie.year}})</em> <button class="btn btn-xs btn-info" type="submit" form="revote" name="revote" value="{{priormovie.id}} -1">change</button>
+  <br/>&nbsp;
+</div>
+{% else %}
+<div class="container fluid">  
+  <font color="red">Last vote</font>: <i class="fa {{voteicon}}"></i> for <em>{{ priormovie.title }} ({{priormovie.year}})</em> <button class="btn btn-xs btn-info" type="submit" form="revote" name="revote" value="{{priormovie.id}} -1">change</button>
+  <br/>&nbsp;
+</div>
+{% endif %}
+{% endif %}
+
+{% if revote %}
+<div class="container fluid">
+  <font color="red">Revote</font>:<br/>&nbsp;
+</div>
+{% endif %}
+
+
+
+<!--  Movie Title, Year -->
+
+
+{% if movie %}
+<div class="container fluid">
+  <div class="alert alert-info alert-sm">
+    <center>
+      <h3 style="color:black;">{{ movie.title }} ({{movie.year}})</h3>
+      <font style="color:black">Genres:</font> {{ movie.genres }}<br/>
+      <font style="color:black">Rating:</font> {{ movie.rating }}
+    </center>
+    
+  </div>
+  <center>
+    {% if posterImgSrc %}
+    <img src="http://static.movietime.co/posters/{{posterImgSrc}}" style="width:175;height:239;" onerror="this.src='http://static.movietime.co/posters/missing.png'" >
+    {% else %}
+    <img src="http://static.movietime.co/posters/missing.png">
+    {% endif %}
+    <p>&nbsp;
+  </center>
+</div>
+
+{% else %}
+
+<div class="container fluid">
+  <div class="alert alert-danger">
+    <center>
+      <h3>Site maintenance: check back here soon!</h3>
+    </center>
+  </div>
+</div>
+{% endif %}
+
+
+
+  <div class="container">
+
+    <!-- Vote Buttons for Phone -->
+
+    <div class="row hidden-md hidden-sm hidden-lg">
+      <div class="col col-xs-2 col-xs-offset-2">
+        <button class="btn btn-default" type="submit" value="{{movie.id}} 1" form="vote" name="thevote">
+	  <i class="fa fa-2x fa-thumbs-o-up"></i>
+	</button>
+      </div>
+      <div class="col col-xs-2">
+	<button class="btn btn-default" type="submit" value="{{movie.id}} -1" form="vote" name="thevote">
+	  <i class="fa fa-2x fa-thumbs-o-down"></i>
+	</button>
+      </div>
+      <div class="col col-xs-2">
+	<button class="btn btn-default" type="submit" value="{{movie.id}} 0" form="vote" name="thevote">
+	  <i class="fa fa-2x fa-arrow-right"></i>
+	</button>
+      </div>
+    </div>
+
+    <!-- Vote Buttons for Tablet and Desktop -->
+
+    <div class="row hidden-xs">
+      <div class="col col-sm-1 col-sm-offset-3">
+	<button class="btn btn-default" type="submit" value="{{movie.id}} 1" form="vote" name="thevote">
+	    <i class="fa fa-4x fa-thumbs-o-up"></i>
+	</button>
+      </div>
+      <div class="col col-sm-1 col-sm-offset-1">
+	<button class="btn btn-default" type="submit" value="{{movie.id}} -1" form="vote" name="thevote">
+	  <i class="fa fa-4x fa-thumbs-o-down"></i>
+	</button>
+      </div>
+      <div class="col col-sm-1 col-sm-offset-1">
+        <button class="btn btn-default" type="submit" value="{{movie.id}} 0" form="vote" name="thevote">
+	  <a style="color:black;" href="{% url 'movies:votemovie' %}"><i class="fa fa-4x fa-arrow-right"></i></a>
+	</button>
+      </div>
+    </div>
+
+  </div>
+
+</form>
+
+<div class="container">
+  <p>&nbsp;
+  <p>More about this movie:
+    {% if movie %}
+  <p><em><b>Synopsis -</b></em> {{ movie.synopsis }}
+    {% endif %}
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+  
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,46 @@
+{% extends "movies/base_in.html" %}
+
+
+{% block content %}
+
+<div class="container fluid">
+
+  <div class="row">
+    <div class="col col-sm-10 col-sm-offset-1">
+      <p>Welcome to <b><font color="dodgerblue">M</font>ovieTime!</b> your very own personalized guide to the movies. The more you vote, the better
+	your pairing with critics will be and the better your recommendations will be. 
+	You can also add movies to your own <em>Watch List</em> when you come across a movie
+	that looks interesting. Have fun!</p>
+    </div>
+  </div>
+
+  <div class="col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:vote' %}"><i class="fa  fa-check"></i>&nbsp;&nbsp; <font size=+1>Vote</font></a>
+    <p>&nbsp;</p>
+  </div>
+
+  <div class="col-sm-4 col-sm-offset-2">
+    <a href="#"><i class="fa  fa-video-camera"></i>&nbsp;&nbsp; <font size=+1>Recommendations</font></a>
+    <p>&nbsp;</p>
+  </div>
+
+  <div class="col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:lists' %}"><i class="fa  fa-list"></i>&nbsp;&nbsp; <font size=+1>My Lists</font></a>
+    <p>&nbsp;</p>
+  </div>
+
+  <div class=" col-sm-4 col-sm-offset-2">
+    <a href="#"><i class="fa  fa-search"></i>&nbsp;&nbsp; <font size=+1>Explore</font></a>
+    <p>&nbsp;</p>
+  </div>  
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+{% endblock %}
+
+
+
+

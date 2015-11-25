@@ -1,0 +1,74 @@
+{% extends "movies/base_in.html" %}
+
+
+{% block headmatter %}
+<script>
+$(document).ready(function(){
+    $("#load").click(function(){
+        $("#button-to-press").toggle();
+        $("#button-to-press-note").toggle();
+        $("#button-pressed").toggle();
+    });
+});
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- FORMS -->
+
+<form action="{% url 'movies:crunchvotes' %}" method="get" id="crunchvotes">
+</form>
+
+<div class="container fluid">
+
+  <div class="row">
+    <div class="col col-sm-10 col-sm-offset-1">
+
+      <button class='btn btn-default' form="crunchvotes" id="load">
+	<span id="button-to-press">
+	  <i class="fa fa-refresh"></i>
+	  &nbsp;&nbsp; <font size=+1>Refresh</font>
+	</span>
+	<span id="button-pressed" style="display:none">
+	  <i class="fa fa-refresh fa-spin"></i>
+	  &nbsp;&nbsp; <font size=+1>Refreshing...</font>
+	</span>
+      </button>
+      <p><span style="color:grey;" id="button-to-press-note">
+	Note: Refresh may take up to 30 seconds. Don't resfresh browser while processing.
+      </span>
+    </div>  
+  </div>
+
+  <div class="row">
+    <div class="col col-xs-12">
+      <h3>Recommended Movies</h3>
+      <table class="table">
+	<tr>
+	<th>Movie Title, Year</th><th>Critic Aproval</th>
+	</tr>
+	 {% for movie in recommended %}
+	 <tr>
+	   <td><a href="{% url 'movies:moviedetail' movie.movieid %}">{{ movie.title }}, {{movie.year}}</a></td><td>{{movie.percentFresh|floatformat:"0" }}</td>
+	 </tr>
+	 {% endfor %}
+      </table>
+    </div>
+  </div>
+
+
+
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+{% endblock %}
+
+
+
+

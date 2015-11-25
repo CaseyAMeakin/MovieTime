@@ -1,0 +1,59 @@
+{% extends "movies/base_in.html" %}
+
+{% block content %}
+
+
+
+<div class="container">
+  <h3>Vote on:</h3>
+  <p>&nbsp;
+</div>
+
+
+<div class="container fluid">
+  
+  <div class=" col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:randommovie' %}"><font  size=+1 >Movies</font></a>
+    <p>&nbsp;</p>
+  </div>
+
+ <div class=" col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:vote' %}"><font  size=+1>Actors</font></a>
+    <p>&nbsp;</p>
+  </div>
+
+ <div class=" col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:vote' %}"><font  size=+1>Directors</font></a>
+    <p>&nbsp;</p>
+  </div>
+
+ <div class=" col-sm-4 col-sm-offset-1">
+    <a href="{% url 'movies:vote' %}"><font  size=+1>Writers</font></a>
+    <p>&nbsp;</p>
+  </div>
+
+
+ <div class=" col-sm-4 col-sm-offset-1">
+   <a href="{% url 'movies:vote' %}"><font  size=+1>Critics</font></a>
+   <p>&nbsp;</p>
+ </div>
+ 
+ 
+ <div class=" col-sm-4 col-sm-offset-1">
+   <a href="{% url 'movies:vote' %}"><font  size=+1>Random</font></a>
+   <p>&nbsp;</p>
+ </div>
+ 
+
+
+</div>
+
+<p>&nbsp;
+<p>&nbsp;
+
+
+{% endblock %}
+
+
+
+
