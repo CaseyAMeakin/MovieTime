@@ -19,7 +19,7 @@
 
   {% if movies %} 
   {% for movie in movies %}
-  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}}, {{movie.year}}</a>
+  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}} ({{movie.year}})</a>
     <button class="btn btn-xs" value="{{movie.id}}" name="movieid" form="delete"><i class="fa fa-trash-o"></i></button>
   {% endfor %}
   {% endif %}

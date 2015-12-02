@@ -95,9 +95,7 @@
       </ul>
 
 
-      
-
-
+     
       <!-- align Right -->
       <ul class="nav navbar-nav navbar-right">
 	<li><a href="{% url 'movies:userlogout' %}">Logout</a></li>
@@ -107,6 +105,8 @@
     </div>
   </div>
 </nav>
+
+
 
 <div  style="width=100%;height:2px;background-color:dodgerblue;">&nbsp;</div>
 <div class="hidden-xs" style="margin: 0; padding: 0; width:100%; background: url('http://static.movietime.co/Banner_Small.png')">
@@ -120,19 +120,23 @@
 <p>&nbsp;<p>&nbsp;
 </div>
 
+
+
 <div class="container fluid">
 
   <div class="row">
     <div class="col col-sm-10 col-sm-offset-1">
 
-      <div class="input-group">
-        <input type="text" name="search_text" class="form-control input-lg" placeholder="Search currently disabled..."  />
-        <span class="input-group-btn">
-          <button class="btn btn-info btn-lg" type="submit" form="search">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </span>
-      </div>
+      <form action="{% url 'movies:search' %}" method="get" id="search">
+	<div class="input-group">
+          <input type="text" name="search_text" class="form-control input-lg" placeholder="Search movies..." />
+          <span class="input-group-btn">
+            <button class="btn btn-info btn-lg" type="submit" form="search">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+	</div>
+      </form>
 
     </div>
   </div>

@@ -2,19 +2,23 @@
 
 {% block content %}
 
+
 <!-- Messages -->
 
 {% if newUserName %}
 
 <div class="container-fliud">
-  <div class="alert alert-info fade in">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    {% if newUserName == "Username already exists" %} 
+  {% if newUserName == "Username already exists" %}
+  <div class="alert alert-danger fade in">
     {{ newUserName }}, please choose another.
-    {% else %}
-    Create account for user <b> {{ newUserName }}</b>
-    {% endif %}
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   </div>
+  {% else %}
+  <div class="alert alert-success fade in">
+    Created account for user <b> {{ newUserName }}</b>. Please sign in below!
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+  {% endif %}
 </div>
 
 {% endif %}

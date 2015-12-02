@@ -8,16 +8,24 @@ $(document).ready(function(){
         $("#button-to-press").toggle();
         $("#button-to-press-note").toggle();
         $("#button-pressed").toggle();
+        //$("#myModal").modal('toggle');
     });
 });
+
+function myFunction() {
+    alert('Hello');
+}
+
 </script>
 {% endblock %}
 
 
 {% block content %}
 
-
 <!-- FORMS -->
+
+<form action="{% url 'movies:randommovie' %}" method="get" id="vote">
+</form>
 
 <form action="{% url 'movies:crunchvotes' %}" method="get" id="crunchvotes">
 </form>
@@ -32,13 +40,24 @@ $(document).ready(function(){
 	  <i class="fa fa-refresh"></i>
 	  &nbsp;&nbsp; <font size=+1>Refresh</font>
 	</span>
+
 	<span id="button-pressed" style="display:none">
 	  <i class="fa fa-refresh fa-spin"></i>
 	  &nbsp;&nbsp; <font size=+1>Refreshing...</font>
 	</span>
+
       </button>
+
+      <button class="btn btn-default" form="vote">
+	<i class="fa fa-check"></i>
+	&nbsp;&nbsp;<font size=+1>Vote</font>
+      </button>
+
+
       <p><span style="color:grey;" id="button-to-press-note">
-	Note: Refresh may take up to 30 seconds. Don't resfresh browser while processing.
+	  <!--
+	      Note: Refresh may take up to 30 seconds. Don't resfresh browser while processing.  If you'd like to see some changes in this list, vote some more and then come back and refresh!
+	    -->
       </span>
     </div>  
   </div>
@@ -48,20 +67,44 @@ $(document).ready(function(){
       <h3>Recommended Movies</h3>
       <table class="table">
 	<tr>
-	<th>Movie Title, Year</th><th>Critic Aproval</th>
+	  <th>Movie Title, Year</th>
+	  <th>Match Score</th>
+	  <!-- <th>Critic Approval</th> -->
 	</tr>
 	 {% for movie in recommended %}
 	 <tr>
-	   <td><a href="{% url 'movies:moviedetail' movie.movieid %}">{{ movie.title }}, {{movie.year}}</a></td><td>{{movie.percentFresh|floatformat:"0" }}</td>
+	   <td><a href="{% url 'movies:moviedetail' movie.movieid %}">{{ movie.title }} ({{movie.year}})</a></td>
+	   <td>{{movie.score|floatformat:"2" }}</td>
+	   <!-- <td>{{movie.percentFresh|floatformat:"0" }}</td> -->
 	 </tr>
 	 {% endfor %}
       </table>
     </div>
   </div>
 
-
-
 </div>
+
+
+<div class="container">
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+	<div class="modal-body">
+	  <span>
+            <i class="fa fa-refresh fa-spin"></i>
+            &nbsp;&nbsp; <font size=+1>Refreshing...</font>
+	    <h3 class="modal-title">hi</h3>
+          </span>
+
+	</div>
+	
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <p>&nbsp;
 <p>&nbsp;

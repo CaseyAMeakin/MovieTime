@@ -36,7 +36,7 @@
   <h4>{{ listHeader }}</h4>
   
   {% for movie in movies %}
-  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}}, {{movie.year}}</a></p>
+  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}} ({{movie.year}})</a></p>
   {% endfor %}
   {% endif %}
     
