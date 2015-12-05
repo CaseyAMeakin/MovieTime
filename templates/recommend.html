@@ -1,22 +1,32 @@
 {% extends "movies/base_in.html" %}
 
-
 {% block headmatter %}
-<script>
-$(document).ready(function(){
-    $("#load").click(function(){
-        $("#button-to-press").toggle();
-        $("#button-to-press-note").toggle();
-        $("#button-pressed").toggle();
-        //$("#myModal").modal('toggle');
-    });
-});
 
-function myFunction() {
-    alert('Hello');
-}
+<script>
+  $(document).ready(function(){
+
+  $("#load").click(function(){
+  $("#button-to-press").toggle();
+  $("#button-to-press-note").toggle();
+  $("#button-pressed").toggle();
+  });
+  
+  $("#show_genres").click(function(){
+  $(".genre_checkboxes").toggle();
+  });
+
+  $('#popover').webuiPopover(
+  {title:'Vote Status',
+  content:'Content',
+  animation:'pop',
+  placement:"bottom-left",
+  width:200
+  });
+  
+  });
 
 </script>
+
 {% endblock %}
 
 
@@ -30,78 +40,98 @@ function myFunction() {
 <form action="{% url 'movies:crunchvotes' %}" method="get" id="crunchvotes">
 </form>
 
-<div class="container fluid">
-
-  <div class="row">
-    <div class="col col-sm-10 col-sm-offset-1">
-
-      <button class='btn btn-default' form="crunchvotes" id="load">
-	<span id="button-to-press">
-	  <i class="fa fa-refresh"></i>
-	  &nbsp;&nbsp; <font size=+1>Refresh</font>
-	</span>
-
-	<span id="button-pressed" style="display:none">
-	  <i class="fa fa-refresh fa-spin"></i>
-	  &nbsp;&nbsp; <font size=+1>Refreshing...</font>
-	</span>
-
-      </button>
-
-      <button class="btn btn-default" form="vote">
-	<i class="fa fa-check"></i>
-	&nbsp;&nbsp;<font size=+1>Vote</font>
-      </button>
+<form action="{% url 'movies:recommend'   %}" method="post" id="update_genrefilter">
+{% csrf_token %}
+</form>
 
 
-      <p><span style="color:grey;" id="button-to-press-note">
-	  <!--
-	      Note: Refresh may take up to 30 seconds. Don't resfresh browser while processing.  If you'd like to see some changes in this list, vote some more and then come back and refresh!
-	    -->
-      </span>
-    </div>  
-  </div>
+<div class="container-fluid">
 
-  <div class="row">
-    <div class="col col-xs-12">
-      <h3>Recommended Movies</h3>
-      <table class="table">
-	<tr>
-	  <th>Movie Title, Year</th>
-	  <th>Match Score</th>
-	  <!-- <th>Critic Approval</th> -->
-	</tr>
-	 {% for movie in recommended %}
-	 <tr>
-	   <td><a href="{% url 'movies:moviedetail' movie.movieid %}">{{ movie.title }} ({{movie.year}})</a></td>
-	   <td>{{movie.score|floatformat:"2" }}</td>
-	   <!-- <td>{{movie.percentFresh|floatformat:"0" }}</td> -->
-	 </tr>
-	 {% endfor %}
-      </table>
-    </div>
-  </div>
+  <div class="col col-xs-11 col-xs-offset-1">
+    <p>To date you have voted on <a href="{% url 'movies:votelist' %}"><font style="font-weight:bold; color:dodgerblue;">{{ nvotes }}</font></a> movies, giving you 
+<b>{% if nvotes < 50 %}<font color="dodgerblue">noob</font>{% endif %}
+{% if nvotes >= 50 and nvotes < 100 %}<font color="dodgerblue">amateur</font>{% endif %}
+{% if nvotes >= 100 and nvotes < 300 %}<font color="dodgerblue">casual</font>{% endif %}
+{% if nvotes > 300 %}<font color="dodgerblue">expert</font>{% endif %}</b> status. 
+<a href="#" id="popover" data-title="Vote Status" data-content="noob (0 to 9), amateur (10 to 49), casual (50 to 99), expert (over 100).">
+  <i style="color:dodgerblue;" class="fa fa-question-circle"></i>  
+</a>
 
-</div>
-
-
-<div class="container">
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-	<div class="modal-body">
-	  <span>
-            <i class="fa fa-refresh fa-spin"></i>
-            &nbsp;&nbsp; <font size=+1>Refreshing...</font>
-	    <h3 class="modal-title">hi</h3>
-          </span>
-
-	</div>
-	
+<!--
+<a href="#" data-toggle="popover" data-trigger="hover" title="Voting Rank" data-content="noob (0 to 9), amateur (10 to 49), casual (50 to 99), expert (over 100)."><i style="color:dodgerblue;" class="fa fa-question-circle"></i>
+</a>
+    <p>If your recommendations are out of date, a "refresh button" should appear below which will 
+      recalculate your pairing with critics. Please note that recalculating takes approximately 
+      10 seconds, so please be patient... the best things come to those who wait!
+-->
+      
+      <div class="btn-group-vertical">
+	{% if nvotes >= 10 %}
+	<button class='btn btn-default' form="crunchvotes" id="load">
+	  <span id="button-to-press">
+	    <i class="fa fa-refresh"></i>
+	    &nbsp;&nbsp;Refresh
+	  </span>
+	  <span id="button-pressed" style="display:none">
+	    <i class="fa fa-refresh fa-spin"></i>
+	    &nbsp;&nbsp;Refreshing...
+	  </span>
+	</button>
+	{% endif %}
+	<button class="btn btn-default" form="vote">
+	  <i class="fa fa-check"></i>
+	  &nbsp;&nbsp;Vote On Movies
+	  <span style="color:grey;" id="button-to-press-note">
+	  </spoverpan>
+	</bpoutton>
+	<button class="btn btn-default" id="show_genres">
+	  <span class="genre_checkboxes">Show Genre Filter</span>
+	  <span class="genre_checkboxes" style="display:none">Hide Genre Filter</span>
+	</button>
       </div>
+      
+    <p class="genre_checkboxes" style="display:none">
+      Check the genres that you want included in your recommendation list:
+    </p>
+    
+    {% for genre in genres %}
+    <div class="checkbox genre_checkboxes" style="display:none">
+      <label>
+	<input form="update_genrefilter" type="checkbox" name="{{genre.genre_key}}" value="{{genre.recommend}}" {% if genre.recommend %}checked{% endif %}>
+	{{genre.genre }}
+      </label>
     </div>
+    {% endfor %}    
+    <button class="btn btn-default genre_checkboxes" id="submit_genres" type="submit" form="update_genrefilter" style="display:none">
+      Update Genre Filter
+    </button>
+    
   </div>
+    
+  <div class="col col-xs-12">
+
+    <h3>Recommended Movies</h3>
+    <p>
+      {% if nvotes >= 10 %}
+      <font color="salmon"><em>Top 50 best matches for selected genres</em></font>
+      {% else %}
+      <font color="red">(You must vote on at least 10 movies to get recommendations.)</font>
+      {% endif %}
+    </p>
+    
+    <table class="table">
+      <tr>
+	<th>Movie Title, Year</th>
+	<th>Match Score</th>
+      </tr>
+      {% for movie in recommended %}
+      <tr>
+	<td><a href="{% url 'movies:moviedetail' movie.movieid %}">{{ movie.title }} ({{movie.year}})</a></td>
+	<td>{{movie.score|floatformat:"2" }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>  
 </div>
 
 

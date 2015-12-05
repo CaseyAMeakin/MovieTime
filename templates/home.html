@@ -3,46 +3,56 @@
 
 {% block content %}
 
-
-
 <!-- FORMS -->
+<form action="{% url 'movies:randommovie' %}" method="get" id="vote">
+</form>
+
+<form action="{% url 'movies:recommend' %}" method="get" id="recommend">
+</form>
+
+<form action="{% url 'movies:watchlist' %}" method="get" id="watchlist">
+</form>
+
+<form action="{% url 'movies:votelist' %}" method="get" id="votelist">
+</form>
 
 
-<div class="container fluid">
+
+<div class="container">
+
   <div class="row">
     <div class="col col-sm-10 col-sm-offset-1">
       <p>&nbsp;
-      <p>Welcome to <b><font color="dodgerblue">M</font>ovieTime!</b> your very own 
-	personalized guide to the movies. The more you vote, the better
+      <p>Welcome to <b><font style="color:dodgerblue">M</font>ovieTime!</font></b>
+	<font class="username-font">{{ username }}</font>, 
+	your very own personalized guide to the movies. The more you vote, the better
 	your pairing with critics will be and the better your recommendations will be. 
-	You can also add movies to your own <em>Watch List</em> when you come across one 
+	You can also add movies to your own 
+	<a href="{% url 'movies:watchlist'  %}"><font style="color: dodgerblue">Watch List</font></a> when you come across one 
 	that looks interesting. The site currently hosts data for {% if num_reviews %}{{num_reviews}}
 	{% else %}358,751{% endif %} reviews on 
 	{% if num_movies %}{{ num_movies }}{% else %}3,025{% endif %} movie titles released
 	between the years 2000 and 2014. Have fun!</p>
+
+      <div class="btn-group-vertical">
+	<button class="btn btn-default" form="vote">
+	  <i class="fa  fa-check"></i>&nbsp;&nbsp;Vote
+	</button>
+	<button class="btn btn-default" form="recommend">
+	  <i class="fa  fa-video-camera"></i>&nbsp;&nbsp;Recommendations
+	</button>
+	<button class="btn btn-default" form="watchlist">
+	  <i class="fa  fa-list"></i>&nbsp;&nbsp;Watch list
+	</button>
+	<button class="btn btn-default" form="watchlist">
+          <i class="fa  fa-list"></i>&nbsp;&nbsp;My Votes
+	</button>
+      </div>  
+
     </div>
   </div>
 
-  <div class="row">
-    <div class="col col-sm-10 col-sm-offset-1">
-      <a href="{% url 'movies:randommovie' %}"><i class="fa  fa-check"></i>&nbsp;&nbsp; <font size=+1>Vote</font></a>
-      <p>&nbsp;</p>
-
-      <a href="{% url 'movies:recommend' %}"><i class="fa  fa-video-camera"></i>&nbsp;&nbsp; <font size=+1>Recommendations</font></a>
-      <p>&nbsp;</p>
-      
-      <a href="{% url 'movies:lists' %}"><i class="fa  fa-list"></i>&nbsp;&nbsp; <font size=+1>My Lists</font></a>
-      <p>&nbsp;</p>
-      
-      <!--
-      <a href="#"><i class="fa  fa-search"></i>&nbsp;&nbsp; <font size=+1>Explore</font></a>
-      <p>&nbsp;</p>
-      -->
-    </div>  
-  </div>
-
 </div>
-
 <p>&nbsp;
 <p>&nbsp;
 

@@ -1,106 +1,92 @@
 <! DOCTYPE html >
 <html lang="en">
+
 <head>
+
   <title>MovieTime!</title>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <!-- 
-  {% load staticfiles %}
-  <link href="{% static "datepicker/css/bootstrap.css" %}" rel="stylesheet">
-  --->
 
+  <!-- google webfonts -->
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+  
+  <!-- webui-popover -->
+  <script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.3/jquery.webui-popover.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.3/jquery.webui-popover.min.css">
+  
   {% block headmatter %}{% endblock %}
   
-<style>
-.label-project {
+  <style>
+    .label-project {
     background-color:#0099ff;
     color:#ffffff;
-}
-
-</style>
-
+    }
+    .username-font {
+    font-family: 'Play', sans-serif;
+    background: #f0f8ff;
+    /* background: #ffffCC; */
+    }
+  </style>
+  
 </head>
 <body>
 
+
 <nav class="navbar-static navbar-inverse">
+
   <div class="container-fluid">
     
-    <!-- Logo -->
+    <!-- Logo and Hamburger Menu Button -->
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
 	<span class="icon-bar"></span>
         <span class="icon-bar"></span>
 	<span class="icon-bar"></span>
       </button>
-      
       <a href="{% url 'movies:index' %}" class="navbar-brand">
-	  <font color="dodgerblue">M</font>ovie<font color="white">T</font>ime!<sup><font color="orange">(beta)</font></sup>
+	<font color="dodgerblue">M</font>ovie<font color="white">T</font>ime!<sup><font color="orange">(beta)</font></sup>
       </a>
-      <!--
-      <a href="{% url 'movies:index' %}" class="navbar-brand">
-        <font size=-1>[ <font color="dodgerblue">{{ user.get_username }}</font> ]</font>
-      </a>
-      -->
     </div>
+    
 
     <!-- Menu Items -->
     <div class="collapse navbar-collapse" id="mainNavBar">
-      <ul class="nav navbar-nav">
-	<!-- Dropdown menu -->
 
-	<li><a href="{% url 'movies:home'  %}">Home</a></li>
+      <ul class="nav navbar-nav navbar">
 
-	<li ><a href="{% url 'movies:recommend'  %}">Recommend</a></li>
+	<li><a href="{% url 'movies:home' %}">Home</a></li>
+	<li><a href="{% url 'movies:recommend' %}">Recommend</a></li>
 
 	<li class="dropdown">
-	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lists<span class="caret"></span></a>
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	    Lists <i class="fa fa-caret-down"></i></a>
 	  <ul class="dropdown-menu">
 	    <li><a href="{% url 'movies:watchlist' %}">Watch List</a></li>
 	    <li><a href="{% url 'movies:votelist' %}">My Votes</a></li>
 	  </ul>
 	</li>
+
 	<li><a href="{% url 'movies:randommovie' %}">Vote</a></li>  
-
-	<!--
-	<li class="dropdown">
-	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vote<span class="caret"></span></a>
-	  <ul class="dropdown-menu">
-	    <li><a href="{% url 'movies:randommovie' %}">Movies</a></li>
-	    <!-- 
-	    <li><a href="#">Actors</a></li>
-            <li><a href="#">Directors</a></li>
-            <li><a href="#">Writers</a></li>
-	  </ul>
-	</li>
-	-->
-
-	<!--
-	<li class="dropdown">
-	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-	    <li><a href="{% url 'movies:search' %}">Movies</a><li>
-	    <li><a href="#">Actors</a></li>
-            <li><a href="#">Directors</a></li>
-            <li><a href="#">Writers</a></li>
-	  </ul>
-	</li>
-	-->
-	
 	<li ><a href="{% url 'movies:about' %}">About</a></li>
 	
       </ul>
 
-
-     
-      <!-- align Right -->
       <ul class="nav navbar-nav navbar-right">
 	<li><a href="{% url 'movies:userlogout' %}">Logout</a></li>
       </ul>
-
+      
 
     </div>
   </div>
@@ -129,10 +115,10 @@
 
       <form action="{% url 'movies:search' %}" method="get" id="search">
 	<div class="input-group">
-          <input type="text" name="search_text" class="form-control input-lg" placeholder="Search movies..." />
+          <input type="text" name="search_text" class="form-control input input-lg" placeholder="Search movies..." />
           <span class="input-group-btn">
-            <button class="btn btn-info btn-lg" type="submit" form="search">
-              <i class="glyphicon glyphicon-search"></i>
+            <button class="btn btn-secondary btn-info btn-lg" type="submit" form="search">
+	      <i class="fa fa-search"></i>&nbsp;
             </button>
           </span>
 	</div>

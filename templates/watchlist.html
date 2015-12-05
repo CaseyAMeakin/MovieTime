@@ -1,5 +1,22 @@
 {% extends "movies/base_in.html" %}
 
+
+
+{% block headmatter %}
+
+<script>
+  $(document).ready(function(){
+  $("a[id^='popover']").webuiPopover(
+  {animation:'pop',
+  placement:"auto",
+  width:"auto"
+  });
+  });
+</script>
+
+{% endblock %}
+
+
 {% block content %}
 
 <!-- Forms -->
@@ -8,8 +25,7 @@
 </form>
 
 
-
-<div class="container-fluid">
+<div class="container">
   
   <div class="row">
     <div class="col col-xs-12">
@@ -19,11 +35,19 @@
 
   {% if movies %} 
   {% for movie in movies %}
-  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}} ({{movie.year}})</a>
-    <button class="btn btn-xs" value="{{movie.id}}" name="movieid" form="delete"><i class="fa fa-trash-o"></i></button>
-  {% endfor %}
-  {% endif %}
 
+  <p><a href="{% url 'movies:moviedetail' movie.id %}">{{movie.title}} ({{movie.year}})</a>
+    <a href="#" id="popover-{{movie.id}}" data-title="Delete?" 
+       data-content="<button class='btn btn-danger' value='{{movie.id}}' name='movieid' form='delete'>Yes</button>">
+      <i style="color:dodgerblue;" class="fa fa-trash"></i>
+    </a>
+  </p>
+  
+  {% endfor %}
+  {% else %}
+  <p><font color="salmon">Movies that you add to your watch list will show up here.</font></p>
+  {% endif %}
+  
 </div>
 
 <p>&nbsp;
